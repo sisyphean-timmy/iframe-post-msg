@@ -1,0 +1,16 @@
+{
+  "name": "tipc_map_post_msg",
+  "version": "1.0.0",
+  "description": "- start their GIS map",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6",
+    "nodemon": "^2.0.22"
+  }
+}

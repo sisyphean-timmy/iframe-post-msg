@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIPC BI-platform</title>
+</head>
+
+<body style="background-color: #d7d7d7;">
+    <iframe id="mapFrame" src="http://127.0.0.1:3000/tipc/map"></iframe>
+
+    <button id="poster"> post msg to iframe map</button>
+
+    <p>there is message from map iframe : <span id="rc"></span> </p>
+</body>
+<script>
+
+    const MAP_ORIGIN = "http://127.0.0.1:3000"
+
+    const mapFrame = document.querySelector("#mapFrame").contentWindow
+    const rc = document.querySelector("#rc")
+
+    const poster = document.querySelector("#poster")
+    poster.onclick = () => {
+        mapFrame.postMessage({
+            type: 'action.randomZoom',
+            payload: {}
+        }, MAP_ORIGIN)
+    }
+
+    window.addEventListener("message", (event) => {
+        if (event.origin !== MAP_ORIGIN) return;
+        console.log("[receive message from map]", event)
+        if (event.data) {
+            rc.textContent = event.data.payload
+        }
+    });
+</script>
+
+</html>
